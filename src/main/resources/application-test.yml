@@ -1,0 +1,44 @@
+# =============================================================================
+# TEST PROFILE CONFIGURATION
+# =============================================================================
+# This profile is used for testing
+# Run with: mvn test -Dspring.profiles.active=test
+
+spring:
+  # Database Configuration for Testing
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driverClassName: org.h2.Driver
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    h2:
+      console:
+        enabled: false
+
+  # JPA Configuration for Testing
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+      show-sql: false
+      properties:
+        hibernate.format_sql: false
+
+  # Security Configuration for Testing
+  # Note: Custom user management is handled by UserService implementing UserDetailsService
+  # No default Spring Security user is needed as authentication is JWT-based
+
+# Logging Configuration for Testing
+logging:
+  level:
+    com.lric3.recipes: WARN
+    org.springframework.security: WARN
+    org.hibernate.SQL: WARN
+    root: WARN
+
+# Test Configuration for Testing
+test:
+  admin:
+    password: ${TEST_ADMIN_PASSWORD}
+  user:
+    password: ${TEST_USER_PASSWORD}

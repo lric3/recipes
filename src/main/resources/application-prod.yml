@@ -1,0 +1,67 @@
+# =============================================================================
+# PRODUCTION PROFILE CONFIGURATION
+# =============================================================================
+# This profile is used for production deployment
+# Run with: mvn spring-boot:run -Dspring-boot.run.profiles=prod
+# 
+# IMPORTANT: All sensitive values should be provided via environment variables
+# Never hardcode production credentials in this file
+
+spring:
+  # Database Configuration for Production
+  # Use environment variables: DB_URL, DB_USERNAME, DB_PASSWORD, DB_DRIVER
+  datasource:
+    url: ${DB_URL}
+    driverClassName: ${DB_DRIVER}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+
+  # JPA Configuration for Production
+  jpa:
+    database-platform: ${DB_DIALECT:org.hibernate.dialect.PostgreSQLDialect}
+    hibernate:
+      ddl-auto: validate
+      show-sql: false
+      properties:
+        hibernate.format_sql: false
+        hibernate.jdbc.batch_size: 20
+        hibernate.order_inserts: true
+        hibernate.order_updates: true
+
+  # Security Configuration for Production
+  # Note: Custom user management is handled by UserService implementing UserDetailsService
+  # No default Spring Security user is needed as authentication is JWT-based
+  h2:
+    console:
+      enabled: false
+
+# Logging Configuration for Production
+logging:
+  level:
+    com.lric3.recipes: INFO
+    org.springframework.security: WARN
+    org.hibernate.SQL: WARN
+    org.hibernate.type.descriptor.sql.BasicBinder: WARN
+    root: WARN
+
+# Server Configuration for Production
+server:
+  port: ${SERVER_PORT:8080}
+  servlet:
+    context-path: ${SERVER_CONTEXT_PATH:/api}
+
+# Actuator Configuration for Production
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: when-authorized

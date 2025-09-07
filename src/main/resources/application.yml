@@ -1,0 +1,71 @@
+# =============================================================================
+# RECIPES APPLICATION CONFIGURATION
+# =============================================================================
+
+# JWT Configuration
+jwt:
+  secret: ${JWT_SECRET}
+  expiration: ${JWT_EXPIRATION:86400000}
+
+# Server Configuration
+server:
+  port: ${SERVER_PORT:8080}
+  servlet:
+    context-path: /api
+
+# Spring Configuration
+spring:
+  # Database Configuration
+  datasource:
+    url: ${DB_URL:jdbc:h2:mem:recipesdb}
+    driverClassName: ${DB_DRIVER:org.h2.Driver}
+    username: ${DB_USERNAME:sa}
+    password: ${DB_PASSWORD}
+    h2:
+      console:
+        enabled: ${H2_CONSOLE_ENABLED:true}
+        path: ${H2_CONSOLE_PATH:/h2-console}
+
+  # JPA Configuration
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+      show-sql: true
+      properties:
+        hibernate.format_sql: true
+
+  # Security Configuration
+  # Note: Custom user management is handled by UserService implementing UserDetailsService
+  # No default Spring Security user is needed as authentication is JWT-based
+
+# Logging Configuration
+logging:
+  level:
+    com.lric3.recipes: DEBUG
+    org.springframework.security: DEBUG
+
+# Actuator Configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+
+# API Documentation Configuration
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+
+# Test Configuration
+test:
+  admin:
+    password: ${TEST_ADMIN_PASSWORD}
+  user:
+    password: ${TEST_USER_PASSWORD}

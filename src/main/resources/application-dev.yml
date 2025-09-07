@@ -1,0 +1,45 @@
+# =============================================================================
+# DEVELOPMENT PROFILE CONFIGURATION
+# =============================================================================
+# This profile is used for local development
+# Run with: mvn spring-boot:run -Dspring-boot.run.profiles=dev
+
+spring:
+  # Database Configuration for Development
+  datasource:
+    url: jdbc:h2:mem:recipesdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driverClassName: org.h2.Driver
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    h2:
+      console:
+        enabled: true
+        path: /h2-console
+
+  # JPA Configuration for Development
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+      show-sql: true
+      properties:
+        hibernate.format_sql: true
+
+  # Security Configuration for Development
+  # Note: Custom user management is handled by UserService implementing UserDetailsService
+  # No default Spring Security user is needed as authentication is JWT-based
+
+# Logging Configuration for Development
+logging:
+  level:
+    com.lric3.recipes: DEBUG
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+# Test Configuration for Development
+test:
+  admin:
+    password: ${TEST_ADMIN_PASSWORD}
+  user:
+    password: ${TEST_USER_PASSWORD}
