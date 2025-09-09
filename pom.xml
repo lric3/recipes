@@ -15,10 +15,10 @@
     
     <!-- Project Information -->
     <groupId>com.lric3</groupId>
-    <artifactId>recipes</artifactId>
+    <artifactId>noshpit-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>recipes</name>
-    <description>Recipes API project for Spring Boot</description>
+    <name>noshpit-api</name>
+    <description>NoshPit API project for Spring Boot</description>
     <url/>
     
     <!-- Project Metadata -->

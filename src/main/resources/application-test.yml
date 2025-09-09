@@ -31,7 +31,7 @@ spring:
 # Logging Configuration for Testing
 logging:
   level:
-    com.lric3.recipes: WARN
+    com.lric3.noshpit.api: WARN
     org.springframework.security: WARN
     org.hibernate.SQL: WARN
     root: WARN

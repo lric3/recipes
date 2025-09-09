@@ -42,7 +42,7 @@ spring:
 # Logging Configuration
 logging:
   level:
-    com.lric3.recipes: DEBUG
+    com.lric3.noshpit.api: DEBUG
     org.springframework.security: DEBUG
 
 # Actuator Configuration
