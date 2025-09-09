@@ -8,6 +8,7 @@ mvnw.cmd
 !**/src/main/**/target/
 !**/src/test/**/target/
 notes/
+.DS_Store
 
 ### STS ###
 .apt_generated
