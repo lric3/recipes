@@ -1,5 +1,6 @@
 package com.lric3.noshpit.api.dto;
 
+import com.lric3.noshpit.api.validation.ValidPassword;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +13,7 @@ public class AuthRequest {
     private String usernameOrEmail;
 
     @NotBlank(message = "Password is required")
+    @ValidPassword
     private String password;
 
     public AuthRequest() {}
